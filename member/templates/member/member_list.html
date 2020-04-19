@@ -1,0 +1,34 @@
+{% extends 'member/base.html' %}
+
+{% block content %}
+<form action="" method="GET">
+    {{ form }}
+    <button type="submit">検索</button>
+</form>
+
+<table class="table table-bordered mt-5">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>学年クラス</th>
+            <th>姓</th>
+            <th>名</th>
+            <th>メール</th>
+            <th>部活</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for member in member_list %}
+        <tr>
+            <td>{{ member.pk }}</td>
+            <td>{{ member.student_meta }}</td>
+            <td>{{ member.last_name }}</td>
+            <td>{{ member.first_name }}</td>
+            <td>{{ member.email }}</td>
+            <td>{% for club in member.club.all %}{{ club }},{% endfor %}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% include 'member/pagination.html'%}
+{% endblock %}
